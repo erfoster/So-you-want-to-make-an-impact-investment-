@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>So You Want to Make an Impact Investment?</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f5f5f3;
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .page-header {
+      width: 100%;
+      max-width: 680px;
+      padding: 40px 24px 12px;
+      text-align: center;
+    }
+    .page-header p {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.6;
+      margin: 0 auto;
+      max-width: 520px;
+    }
+    .widget-wrapper {
+      width: 100%;
+      max-width: 680px;
+      padding: 0 24px 40px;
+    }
+    .widget-card {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    footer {
+      width: 100%;
+      max-width: 680px;
+      padding: 16px 24px 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #999;
+      line-height: 1.6;
+    }
+    footer a { color: #999; }
+
+    /* ── Widget styles ── */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    #app {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      min-height: 460px;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 32px;
+      max-width: 100%;
+    }
+    .header { text-align: center; margin-bottom: 20px; }
+    .header h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.2px; color: #111; }
+    .header p { font-size: 13px; color: #777; margin-top: 4px; }
+    .breadcrumb { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; min-height: 20px; margin-bottom: 16px; }
+    .crumb { font-size: 11px; padding: 2px 8px; border-radius: 20px; background: #f0f0f0; color: #555; white-space: nowrap; max-width: 120px; overflow: hidden; text-overflow: ellipsis; }
+    .crumb-arrow { font-size: 12px; color: #ccc; }
+    .q-card { border-radius: 12px; padding: 20px 22px; margin-bottom: 12px; background: #f6f6f6; }
+    .q-card.focus-card { background: #f0f8f4; }
+    .step-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; color: #5577ee; }
+    .step-label.focus { color: #22aa77; }
+    .q-text { font-size: 18px; font-weight: 650; line-height: 1.35; color: #111; }
+    .q-note { font-size: 12px; color: #888; margin-top: 8px; line-height: 1.45; font-style: italic; border-left: 2px solid #ddd; padding-left: 8px; }
+    .focus-pill { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 3px 10px; background: #e6f4ed; color: #1a7a4a; border-radius: 20px; margin-bottom: 10px; }
+    .answers { display: flex; flex-direction: column; gap: 8px; }
+    .ans-btn { padding: 12px 16px; border-radius: 10px; border: 1.5px solid #e2e2e2; background: #fff; color: #111; font-size: 14px; font-weight: 500; cursor: pointer; text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 10px; transition: border-color 0.15s, background 0.15s; }
+    .ans-btn:hover { border-color: #5577ee; background: #f8f8f8; }
+    .ans-btn.focus:hover { border-color: #22aa77; }
+    .ans-label { font-weight: 600; font-size: 14px; display: block; }
+    .ans-sub { font-size: 11px; color: #777; margin-top: 2px; display: block; }
+    .ans-arrow { font-size: 15px; flex-shrink: 0; color: #5577ee; }
+    .ans-arrow.focus { color: #22aa77; }
+    .dest-card { border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 8px; }
+    .dest-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.7); }
+    .dest-title { font-size: 25px; font-weight: 750; color: #fff; line-height: 1.15; }
+    .dest-desc { font-size: 13px; color: rgba(255,255,255,0.9); line-height: 1.5; }
+    .dest-examples { font-size: 12px; color: rgba(255,255,255,0.7); padding-top: 9px; border-top: 1px solid rgba(255,255,255,0.18); }
+    .dest-examples strong { color: rgba(255,255,255,0.88); }
+    .dest-sector-badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px; border-radius: 20px; background: rgba(255,255,255,0.18); color: rgba(255,255,255,0.9); margin-bottom: 2px; }
+    .dest-note { font-size: 11px; color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.1); border-radius: 8px; padding: 8px 10px; margin-top: 4px; line-height: 1.45; }
+    .path-row { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+    .path-chip { font-size: 11px; padding: 2px 7px; border-radius: 20px; background: rgba(255,255,255,0.14); color: rgba(255,255,255,0.8); }
+    .alts-section { margin-top: 14px; }
+    .alts-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: #888; margin-bottom: 8px; }
+    .alts-row { display: flex; gap: 8px; }
+    .alt-card { flex: 1; padding: 11px 13px; border-radius: 10px; border: 1.5px solid #e4e4e4; background: #fff; border-left-width: 4px; }
+    .alt-title { font-size: 13px; font-weight: 700; margin-bottom: 3px; }
+    .alt-desc { font-size: 11px; color: #777; line-height: 1.35; }
+    .actions { display: flex; gap: 8px; margin-top: 14px; }
+    .back-btn { padding: 9px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; border: 1.5px solid #e0e0e0; background: transparent; color: #555; cursor: pointer; white-space: nowrap; }
+    .restart-btn { padding: 9px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; border: none; background: #efefef; color: #333; cursor: pointer; flex: 1; }
+    .restart-btn:hover { background: #e4e4e4; }
+  </style>
+</head>
+<body>
+
+  <div class="page-header">
+    <p>This tool is designed to help you find your place in the impact investing ecosystem. Answer a few questions about your goals, timeline, and values — and we'll point you in the right direction.</p>
+  </div>
+
+  <div class="widget-wrapper">
+    <div class="widget-card">
+      <div id="app">
+        <div class="header">
+          <h1>So You Want to Make an Impact Investment?</h1>
+          <p>Answer a few questions to find your best fit</p>
+        </div>
+        <div class="breadcrumb" id="breadcrumb"></div>
+        <div id="content"></div>
+        <div class="actions" id="actions"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    This tool is for educational purposes only and does not constitute financial advice.<br>
+    Developed with AI assistance (Claude, Anthropic · claude.ai) · &copy; 2026
+  </footer>
+
+  <script>
+    const SECTOR_LABELS = { housing:"Housing & Community", climate:"Environment & Climate", equity:"Racial & Economic Equity", health:"Health, Education & Social", none:null };
+
+    const DEST_META = {
+      public_market:     { color:"#2D6A4F", title:"Public Market Investments",                            short:"ESG funds & SRI ETFs — liquid, market-rate returns" },
+      community_finance: { color:"#7A2235", title:"Additional Community Finance Avenues",                 short:"Community notes & loan funds — direct local impact" },
+      investing_club:    { color:"#B87818", title:"Collective Investing",                                 short:"Collective investing — shared research & decisions" },
+      cdfi:              { color:"#5C3D7A", title:"Community Development Finance Institutions (CDFIs)",   short:"Mission-driven deposits — stable community returns" },
+      crowdfunded:       { color:"#B52020", title:"Crowdfunded Private Markets",                          short:"Direct deal platforms — high-conviction, targeted impact" },
+      reit:              { color:"#1A4A5C", title:"Impact-Focused Real Estate Investment Vehicles",        short:"Impact real estate — market-rate, community footprint" },
+      emerging_alt:      { color:"#4A8EC0", title:"Emerging Alternatives",                                short:"Blended finance & structured vehicles — accredited investors" },
+      impact_advisor:    { color:"#6B4020", title:"Impact Investment Advisors",                           short:"Expert guidance for a custom impact portfolio" }
+    };
+
+    const TREE = {
+      start: { q:"How much do you have to invest?", a:[
+        { label:"$10 – $10,000",     amount:"small", branch:"a_timeframe", next:"sector_binary" },
+        { label:"$25,000 – $50,000", amount:"mid",   branch:"b_timeframe", next:"sector_binary" },
+        { label:"Over $100,000",     amount:"large",  branch:"b_timeframe", next:"sector_binary" }
+      ]},
+      sector_binary: { isFocus:true, q:"Do you have a specific cause area you want to focus on?", a:[
+        { label:"Yes — I have a specific focus",       sub:"I want examples tailored to my cause area",     next:"sector_select" },
+        { label:"Open to a variety of impact themes",  sub:"Show me what fits my financial profile best",   sector:"none", next:"__branch__" }
+      ]},
+      sector_select: { isFocus:true, q:"What area of impact matters most to you?", a:[
+        { label:"Housing & Community Development", sector:"housing", next:"__branch__" },
+        { label:"Environment & Climate",           sector:"climate", next:"__branch__" },
+        { label:"Racial & Economic Equity",        sector:"equity",  next:"__branch__" },
+        { label:"Health, Education & Social",      sector:"health",  next:"__branch__" }
+      ]},
+      a_timeframe: { q:"When might you need access to this money?", a:[
+        { label:"Within 2 years",  sub:"Short-term — liquidity is important",       horizon:"short",  next:"a_short_return" },
+        { label:"2 – 10 years",    sub:"Medium-term commitment",                     horizon:"medium", next:"a_long_research" },
+        { label:"10+ years",       sub:"Long-term or retirement / pension capital",  horizon:"long",   next:"a_long_research" }
+      ]},
+      a_short_return: { q:"What level of return are you seeking?", a:[
+        { label:"Market-rate returns",  sub:"I want competitive financial returns", next:"public_market" },
+        { label:"Capital preservation", sub:"Below-market returns are fine",        next:"community_finance" }
+      ]},
+      a_long_research: { q:"How much time can you give to research & due diligence?", a:[
+        { label:"More time", sub:"I enjoy being engaged & learning",  next:"investing_club" },
+        { label:"Less time", sub:"I prefer a simpler approach",       next:"a_long_risk" }
+      ]},
+      a_long_risk: { q:"What's your approach to investment risk?", a:[
+        { label:"Open to higher-risk opportunities", sub:"I'm willing to accept more risk for greater direct impact", next:"crowdfunded" },
+        { label:"Stable, predictable returns",       sub:"I want reliable returns alongside community impact",        next:"cdfi" }
+      ]},
+      b_timeframe: { q:"When might you need access to this money?", a:[
+        { label:"Within 2 years",  sub:"Short-term — liquidity is important",       horizon:"short",  next:"b_short_return" },
+        { label:"2 – 10 years",    sub:"Medium-term commitment",                     horizon:"medium", next:"b_impact_depth" },
+        { label:"10+ years",       sub:"Long-term or retirement / pension capital",  horizon:"long",   next:"b_impact_depth" }
+      ]},
+      b_short_return: { q:"What level of return are you seeking?", a:[
+        { label:"Market-rate returns",                 sub:"I want competitive financial returns",          next:"reit" },
+        { label:"Below market / capital preservation", sub:"Mission matters more than maximizing returns",  next:"cdfi" }
+      ]},
+      b_impact_depth: { q:"Beyond avoiding harm — what's your impact goal?",
+        note:"This assumes you're already committed to values-aligned investing. The question is: what level of change are you aiming for?", a:[
+        { label:"Actively do good",      sub:"Fund specific projects, communities, or ventures with direct impact", next:"b_long_return" },
+        { label:"Drive systemic change", sub:"Reshape capital markets, systems, or policy at scale",               next:"b_sys_accredited" }
+      ]},
+      b_sys_accredited: { q:"Are you an accredited investor?",
+        note:"Generally: $200k+ annual income (or $300k with a spouse) or $1M+ net worth excluding your primary residence.", a:[
+        { label:"Yes, I'm accredited", next:"emerging_alt" },
+        { label:"No", sub:"An advisor can help you access systems-level vehicles and explore your options", next:"impact_advisor" }
+      ]},
+      b_long_return: { q:"What level of return are you seeking?", a:[
+        { label:"Market-rate returns",     sub:"I want competitive financial returns",        next:"b_long_risk" },
+        { label:"Moderate / below market", sub:"I'll accept lower returns for higher impact", next:"b_long_research" }
+      ]},
+      b_long_risk: { q:"What's your approach to investment risk?", a:[
+        { label:"Open to higher-risk opportunities", sub:"I can handle volatility for greater direct impact potential", next:"b_accredited_check" },
+        { label:"Stable, diversified impact",        sub:"I want reliable, diversified impact investing",              next:"investing_club" }
+      ]},
+      b_accredited_check: { q:"Are you an accredited investor?",
+        note:"Generally: $200k+ annual income (or $300k with a spouse) or $1M+ net worth excluding your primary residence.", a:[
+        { label:"Yes, I'm accredited", next:"b_high_risk_research" },
+        { label:"No", sub:"Regulation CF platforms are open to all investors", next:"crowdfunded" }
+      ]},
+      b_high_risk_research: { q:"How much time can you give to research & due diligence?", a:[
+        { label:"Less time", sub:"I want it professionally managed",   next:"emerging_alt" },
+        { label:"More time", sub:"I want direct involvement in deals", next:"crowdfunded" }
+      ]},
+      b_long_research: { q:"How much time can you give to research & due diligence?", a:[
+        { label:"Less time", sub:"I'd benefit from expert guidance",   next:"impact_advisor" },
+        { label:"More time", sub:"I want community-rooted investing",  next:"community_finance" }
+      ]},
+
+      public_market: { type:"dest", color:"#2D6A4F", title:"Public Market Investments",
+        desc:"ESG funds, socially responsible ETFs, and community investing apps let you start small while keeping liquidity and pursuing market-rate returns. Public market impact investing is the most accessible entry point — it requires no accreditation, offers daily liquidity, and can be started with as little as $10. Resources like Pensions for Purpose and Investyourvalues.org can help you screen retirement funds and think strategically about a sustainable, impact-forward 401(K) or pension plan.",
+        ex:{ housing:"Community development ETFs, housing-focused SRI funds", climate:"Sphere 500 Climate Fund, clean energy ETFs, green bond funds", equity:"Racial equity ETFs, minority-owned business SRI funds", health:"Healthcare access funds, social determinants-focused ETFs", none:"ESG ETFs, SRI mutual funds, Sphere 500 Climate Fund, As You Sow shareholder advocacy" },
+        alternates:["investing_club","cdfi"]
+      },
+      community_finance: { type:"dest", color:"#7A2235", title:"Additional Community Finance Avenues",
+        desc:"Community notes, charitable loan funds, and local lending circles put your capital directly to work in the communities that matter most to you. These instruments are typically offered by nonprofit organizations, community development groups, and faith-based institutions — offering a direct, local connection to impact. Emerging structures like Community Investment Funds and Diversified Community Investment Funds are expanding access further, with some allowing smaller investments by a percentage of investors.",
+        ex:{ housing:"Community land trust notes, affordable housing loan funds, Local Return", climate:"Clean energy revolving loan funds, green community notes", equity:"Black-led loan funds, racial equity community notes, Local Return", health:"Community health center loan funds, Leviticus Fund", none:"Community notes, charitable loan funds, RSF Social Finance, Shared Capital Cooperative, Craft3" },
+        alternates:["cdfi","public_market"]
+      },
+      investing_club: { type:"dest", color:"#B87818", title:"Collective Investing",
+        desc:"Collective investing lowers barriers to entry and amplifies impact by bringing together a group to pool capital, share research, and make decisions collaboratively. Investment clubs pool contributions from members who meet regularly to analyze opportunities and vote on investments. Cooperatives offer shared ownership in community enterprises with a democratic voice in governance. Both structures are excellent for building knowledge and connection alongside your financial commitment. Slow Money chapters and Seed Commons are two strong examples.",
+        ex:{ housing:"Community land trust co-ops, housing cooperatives, Kensington Corridor Trust", climate:"Green investment clubs, clean energy co-ops, community solar, Slow Money chapters (local agriculture)", equity:"Worker co-op investment clubs, minority business investment circles, Angels of Main Street", health:"Social enterprise investment clubs, community health co-ops", none:"Investment clubs, cooperatives, Angels of Main Street, Slow Money, Seed Commons, Industrial Commons" },
+        alternates:["crowdfunded","cdfi"]
+      },
+      cdfi: { type:"dest", color:"#5C3D7A", title:"Community Development Finance Institutions (CDFIs)",
+        desc:"Community Development Financial Institutions see opportunity where others see risk. CDFIs are certified by the U.S. Treasury and specialize in providing fair, responsible financing to rural, urban, Native, and other communities that mainstream finance doesn't traditionally reach. They offer financial education, business coaching, and low-interest loans that expand economic potential and build wealth. Depending on the structure, you can invest through a savings account, certificate of deposit, or community investment note. Seed Commons and Coastal Enterprises Inc. are two examples of differently structured CDFIs.",
+        ex:{ housing:"Self-Help Credit Union, Reinvestment Fund, Southern Bancorp, Local Initiatives Support Corporation", climate:"RSF Social Finance, Beneficial State Bank, Coastal Enterprises Inc.", equity:"Carver Federal Savings Bank, Southern Bancorp, Boston Impact Initiative, Arctaris Impact Investors", health:"Community health-focused CDFIs, Local Initiatives Support Corporation", none:"Self-Help Credit Union, Seed Commons, Coastal Enterprises Inc., Opportunity Finance Network, Inclusiv" },
+        alternates:["community_finance","investing_club"]
+      },
+      crowdfunded: { type:"dest", color:"#B52020", title:"Crowdfunded Private Markets",
+        desc:"Crowdfunding platforms open the door to direct investment in startups, real estate projects, and community enterprises — putting your capital exactly where you want it to go. Thanks to Regulation CF (JOBS Act), non-accredited investors can now participate in many crowdfunding offerings. These platforms let you invest in specific companies, projects, or funds with a transparent impact thesis. Honeycomb Credit, Kiva, Wefunder, and StartEngine are among the platforms making this opportunity available to individual investors.",
+        ex:{ housing:"Honeycomb Credit (local small business lending), Wefunder (community projects)", climate:"Green Liberty Notes by Connecticut Green Bank, clean energy-focused Wefunder campaigns", equity:"Honeycomb Credit, Angels of Main Street", health:"Health-focused Wefunder campaigns, StartEngine social enterprises", none:"Kiva, Wefunder, StartEngine, Honeycomb Credit, Green Liberty Notes" },
+        alternates:["investing_club","reit"]
+      },
+      reit: { type:"dest", color:"#1A4A5C", title:"Impact-Focused Real Estate Investment Vehicles",
+        desc:"Impact-focused real estate investment trusts and community land trusts offer market-rate returns alongside a tangible, lasting community footprint. This category spans public REITs with an affordable housing or green building mandate, private community land trusts that permanently remove housing from the speculative market, and impact-focused real estate funds. It is a strong fit for investors who want a physical, place-based connection to their investment. Iroquois Valley Farmland REIT, Kachuwa Impact Fund, and Kensington Corridor Trust are three compelling examples.",
+        ex:{ housing:"Kensington Corridor Trust, Kachuwa Impact Fund, affordable housing REITs", climate:"Green REITs, sustainable forestry funds, Iroquois Valley Farmland REIT (regenerative agriculture)", equity:"Affordable housing funds, equitable development land trusts", health:"Healthcare facility funds with community benefit agreements", none:"Iroquois Valley Farmland REIT, Kensington Corridor Trust, Kachuwa Impact Fund" },
+        alternates:["public_market","crowdfunded"]
+      },
+      emerging_alt: { type:"dest", color:"#4A8EC0", title:"Emerging Alternatives",
+        desc:"Emerging alternatives sit at the leading edge of impact investing — capturing structured and managed vehicles for accredited investors including blended finance, outcome-based instruments, and frontier capital strategies. The field is evolving rapidly: new platforms for revenue-based financing for underserved small businesses, REIT/co-op hybrid governance structures, and more equitably structured search funds are all emerging pathways. TAVO and Kachuwa Impact Fund are examples of newer vehicles expanding what is possible for individual investors.",
+        ex:{ housing:"Opportunity Zone funds, affordable housing blended finance", climate:"Green bonds, climate transition funds, Iroquois Valley Farmland REIT (regenerative agriculture)", equity:"Racial equity blended finance, pay-for-success workforce programs, TAVO", health:"Social impact bonds for healthcare outcomes, pay-for-success contracts", none:"Social impact bonds, blended finance, TAVO, revenue-based financing, Opportunity Zone funds" },
+        alternates:["impact_advisor","crowdfunded"]
+      },
+      impact_advisor: { type:"dest", color:"#6B4020", title:"Impact Investment Advisors",
+        desc:"A financial advisor specializing in impact investing can build a customized portfolio precisely aligned with your values, timeline, and return goals. This is the right path when your situation — investment size, complexity of goals, or interest in systemic change — benefits from professional guidance. Many impact advisors have minimum investment thresholds ($100k+), but some work with smaller portfolios or offer initial consultations. Look for advisors with a demonstrated track record in mission-aligned investing, not just ESG screening.",
+        ex:{ housing:"Advisors specializing in housing & CRA-aligned portfolios", climate:"Climate-focused advisors, Beneficial State Bank (as complementary option)", equity:"Adesina Social Capital, racial equity-focused advisors", health:"Health impact advisors, social determinants portfolio builders", none:"Chicory Wealth, New Day Impact, Orban Capital Advisors, CapShift, Just Futures, Rad Financial Planners" },
+        alternates:["emerging_alt","investing_club"]
+      }
+    };
+
+    let history = [], current = 'start', pendingBranch = null;
+    let selectedSector = 'none', selectedAmount = 'small', selectedHorizon = 'medium';
+
+    function render() {
+      const node = TREE[current];
+      const contentEl = document.getElementById('content');
+      const actionsEl = document.getElementById('actions');
+      const bcEl = document.getElementById('breadcrumb');
+
+      bcEl.innerHTML = '';
+      history.forEach((h, i) => {
+        if (i > 0) { const a = document.createElement('span'); a.className='crumb-arrow'; a.textContent='›'; bcEl.appendChild(a); }
+        const c = document.createElement('span'); c.className='crumb'; c.textContent=h.answer; c.title=h.answer; bcEl.appendChild(c);
+      });
+      actionsEl.innerHTML = '';
+
+      if (node.type === 'dest') {
+        const ex = node.ex[selectedSector] || node.ex['none'];
+        const sectorLabel = SECTOR_LABELS[selectedSector];
+        const badgeHtml = sectorLabel ? `<div class="dest-sector-badge">⬡ ${sectorLabel}</div>` : '';
+        const pathHtml = history.map(h=>`<span class="path-chip">${h.answer}</span>`).join('');
+        let noteHtml = '';
+        if (selectedHorizon === 'long') noteHtml += `<div class="dest-note"><strong>Retirement / long-term tip:</strong> At 10+ years, explore tax-advantaged accounts — ESG options in 401(k)s, Roth IRAs at mission-driven credit unions, or self-directed IRAs that can hold some of these vehicles.</div>`;
+        if (selectedAmount === 'large' && current !== 'impact_advisor') noteHtml += `<div class="dest-note"><strong>At your investment level:</strong> A dedicated impact advisor is worth consulting as a complement — most work with $100k+ minimums.</div>`;
+        const alts = node.alternates || [];
+        const altsHtml = alts.length ? `<div class="alts-section"><div class="alts-label">Also worth exploring</div><div class="alts-row">${alts.map(id=>{const m=DEST_META[id];return`<div class="alt-card" style="border-left-color:${m.color}"><div class="alt-title" style="color:${m.color}">${m.title}</div><div class="alt-desc">${m.short}</div></div>`;}).join('')}</div></div>` : '';
+
+        contentEl.innerHTML = `
+          <div class="dest-card" style="background:${node.color}">
+            ${badgeHtml}
+            <div class="dest-tag">Your best fit →</div>
+            <div class="dest-title">${node.title}</div>
+            <div class="dest-desc">${node.desc}</div>
+            <div class="dest-examples"><strong>Examples:</strong> ${ex}</div>
+            ${noteHtml}
+            <div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:.8px">Your path</div>
+            <div class="path-row">${pathHtml}</div>
+          </div>${altsHtml}`;
+
+        const bb = document.createElement('button'); bb.className='back-btn'; bb.textContent='← Back'; bb.onclick=goBack; actionsEl.appendChild(bb);
+        const rb = document.createElement('button'); rb.className='restart-btn'; rb.textContent='↺  Start over'; rb.onclick=restart; actionsEl.appendChild(rb);
+
+      } else {
+        const isFocus = !!node.isFocus;
+        const noteHtml = node.note ? `<div class="q-note">${node.note}</div>` : '';
+        const sectorLabel = SECTOR_LABELS[selectedSector];
+        const pillHtml = (sectorLabel && !isFocus) ? `<div class="focus-pill">⬡ ${sectorLabel} focus</div>` : '';
+        contentEl.innerHTML = `
+          <div class="q-card${isFocus?' focus-card':''}">
+            <div class="step-label${isFocus?' focus':''}">Question ${history.length + 1}</div>
+            <div class="q-text">${node.q}</div>${noteHtml}
+          </div>${pillHtml}
+          <div class="answers">${node.a.map((a,i)=>`
+            <button class="ans-btn${isFocus?' focus':''}" onclick="pick(${i})">
+              <span><span class="ans-label">${a.label}</span>${a.sub?`<span class="ans-sub">${a.sub}</span>`:''}</span>
+              <span class="ans-arrow${isFocus?' focus':''}">→</span>
+            </button>`).join('')}</div>`;
+        if (history.length > 0) { const bb=document.createElement('button'); bb.className='back-btn'; bb.textContent='← Back'; bb.onclick=goBack; actionsEl.appendChild(bb); }
+      }
+    }
+
+    function pick(i) {
+      const node = TREE[current], ans = node.a[i];
+      if (ans.branch)              pendingBranch = ans.branch;
+      if (ans.amount)              selectedAmount = ans.amount;
+      if (ans.horizon)             selectedHorizon = ans.horizon;
+      if (ans.sector !== undefined) selectedSector = ans.sector;
+      history.push({ from: current, answer: ans.label });
+      let next = ans.next;
+      if (next === '__branch__') next = pendingBranch;
+      current = next;
+      render();
+    }
+
+    function goBack() {
+      if (!history.length) return;
+      const prev = history.pop();
+      current = prev.from;
+      if (current === 'start')                                          { selectedAmount='small'; selectedSector='none'; selectedHorizon='medium'; pendingBranch=null; }
+      else if (current === 'sector_binary')                             { selectedSector='none'; }
+      else if (current === 'a_timeframe' || current === 'b_timeframe') { selectedHorizon='medium'; }
+      render();
+    }
+
+    function restart() {
+      history=[]; current='start'; pendingBranch=null; selectedSector='none'; selectedAmount='small'; selectedHorizon='medium';
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>
